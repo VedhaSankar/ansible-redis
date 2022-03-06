@@ -1,8 +1,9 @@
 from flask import Flask, render_template
 import redis
+import random
 
 # connect to redis
-client = redis.Redis(host='localhost', port=6379)
+client = redis.Redis(host='localhost', port=6379, decode_responses=True)
 app = Flask(__name__)
 
 @app.route('/')
@@ -13,7 +14,7 @@ def start():
 
     # get a value
     value = client.get('test-key')
-    print(type(value))
+    print(value)
 
     return render_template('index.html')
 
